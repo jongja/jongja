@@ -16,3 +16,6 @@ Next, we can execute just typing below command
 ```
 python3 run.py [Image_name]
 ```
+
+# Result
+![result](./Result/result.PNG)
