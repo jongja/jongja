@@ -7,7 +7,9 @@ OpenCV is used to create tables using image processing algorithms. At the same t
 # Usage
 Before execute this program, we need to following python programs  
 ```
-$ pip3 install pytesseract scikit-build opencv-python
+$ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+$ sudo apt install tesseract-ocr libtesseract-dev
+$ pip3 install pytesseract scikit-build openpyxl opencv-python -vvv
 ```
 Next, we can execute just typing below command  
 
