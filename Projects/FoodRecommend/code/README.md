@@ -6,10 +6,11 @@ In order to use this program, you must first create a training model, which can 
 ```
 $python3 Training_model.py
 ```
+![result1](./result/1.PNG)  
+
 ### Usage
 ```
 $ python3 Recommandation.py
 ```
-
-
-
+### Result
+![result2](./result/2.PNG)  
