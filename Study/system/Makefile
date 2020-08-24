@@ -1,4 +1,4 @@
-CFS = cfs_scheduler.c
+CFS = cfs_scheduler.h cfs_scheduler.c
 RUNFILE = run
 CC = gcc
 
