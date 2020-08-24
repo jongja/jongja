@@ -1,0 +1,31 @@
+#########################################################
+#	Cache side-channel Attack Detector	        #
+#########################################################
+
+# Created by JongHyeon Cho in kwangwoon uni. 2019 #
+# Copyright @ 2019 JongHyeon Cho All right reserved. #
+
+This real-time detection program can detect 3 cache side-channel attacks.
+FLUSH+RELOAD, FLUSH+FLUSH, PRIME+PROBE
+
+This program needs tensorflow (ver. >= 1.14).
+Also, need root permission.
+
+# How to use:
+./python3 run.py
+
+
+# How to training model:
+
+To training this machine learning model, using Intel PCM as CSV mode. (./pcm-icsl -e icsl -csv=[path]).
+And then, add to data to training_file.csv. Order of csv data like this.
+
+IPC,L1MISS,L2MISS,L3MISS,Branch,Result
+
+Result - 0 : Normal state
+	 1 : FLUSH+RELOAD attack
+	 2 : FLUSH+FLUSH  attack
+	 3 : PRIME+PROBE  attack
+
+./python3 training.py [trainig file path]
+
