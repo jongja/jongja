@@ -59,29 +59,121 @@ u64 sched_slice(struct cfs_rq* cfs_rq, struct sched_entity* se) {
 	return slice;
 }
 
+u64 __calc_delta_fair(u64 delta, struct sched_entity* se) {
+	if (se->load.weight != 1024)
+		delta = __calc_delta(delta, 1024, &se->load);
+	return delta;
+}
+
+u64 sched_vslice(struct cfs_rq* cfs_rq, struct sched_entity* se) {
+	return __calc_delta_fair(sched_slice(cfs_rq, se), se);
+}
+
+/// Simulator API functions ///
+
+void qsort(int l, int r, struct sched_entity* a) {
+	if (l < r) {
+		u64 p = a[l].vruntime;
+		int i = l, j = r + 1;
+		do {
+			do i++; while (i <= r && a[i].vruntime < p);
+			do j--; while (j >= 0 && a[j].vruntime > p);
+			if (i < j) {
+				struct sched_entity t = a[i]; a[i] = a[j]; a[j] = t;
+			}
+		} while (i < j);
+		struct sched_entity t = a[l]; a[l] = a[j]; a[j] = t;
+		qsort(l, j - 1, a);
+		qsort(j + 1, r, a);
+	}
+}
+
 void init() {
 	cfs_queue = &cfs_pool;
 	cfs_queue->nr_running = 0;
 	cfs_queue->load.weight = 0;
 	cfs_queue->load.inv_weight = 0;
-	cfs_queue->curr = NULL;
+	cfs_queue->curr = se_list;
+}
+
+int printMenu() {
+	int input;
+	printf("==== CFS scheduler simulator ====\n");
+	printf(" 1. Insert Task\n 2. Start\n 3. Status\n 4. Exit\n");
+	printf("=================================\n");
+	printf("Input > ");
+	scanf("%d", &input);
+	if (input == 4) input = 0;
+	return input;
+}
+
+void enqueue_entity(struct cfs_rq* cfs_rq) {
+	struct sched_entity* se = se_alloc();
+	int nice = 0;
+	printf("Input nice(-20 to 19) > ");
+	scanf("%d", &nice);
+	while (nice < -20 || nice > 19) {
+		printf("\nERROR: WRONG INPUT\n");
+		printf("Input nice(-20 to 19) > ");
+		scanf("%d", &nice);
+	}
+
+	se->task_idx = sched_entity_idx;
+	se->nice = nice;
+	se->load.weight = prio_to_weight[nice + 20];
+	se->load.inv_weight = WMULT_CONST / se->load.weight;
+	se->on_rq = 0;
+	se->called = 0;
+	se->cfs_rq = cfs_rq;
+	se->vruntime = 0;
+}
+
+void status() {
+	printf("\n[CFS status]\n");
+	printf("Tasks\t%d\n", sched_entity_idx);
+	printf("\n");
+	return;
+}
+
+void start(struct cfs_rq* cfs_rq) {
+	u64 delta = 312342; // random value
+	int scheduling;
+	printf("Input Sched time > ");
+	scanf("%d", &scheduling);
+	while (scheduling--) {
+		cfs_rq->curr->vruntime += __calc_delta_fair(delta, cfs_rq->curr);
+		cfs_rq->curr->called++;
+		//printf("wow!, %d, %lld\n", cfs_rq->curr->task_idx, cfs_rq->curr->vruntime);
+		qsort(0, sched_entity_idx - 1, se_list);
+	}
+
+	printf("\n-------------------------------------------\n");
+	printf("task\tnice\tvruntime\tcall\n");
+	printf("-------------------------------------------\n");
+
+	for (int i = 0; i < sched_entity_idx; i++) {
+		printf(" %d\t%3d\t%lld\t %d\n", se_list[i].task_idx, se_list[i].nice, se_list[i].vruntime, se_list[i].called);
+	}
+	printf("\n");
+	return;
 }
 
 
 int main(void) {
 	init();
-	int nice;
-	printf("Nice > ");
-	scanf("%d", &nice);
-
-	struct sched_entity* se = se_alloc();
-	se->nice = nice;
-	se->load.weight = prio_to_weight[nice + 20];
-	se->load.inv_weight = WMULT_CONST / se->load.weight;
-	se->on_rq = 0;
-	se->cfs_rq = cfs_queue;
-
-	printf("%lld\n", sched_slice(cfs_queue, se));
-
+	int ip;
+	while (ip = printMenu()) {
+		switch (ip) {
+		case 1:
+			enqueue_entity(cfs_queue);
+			break;
+		case 2:
+			start(cfs_queue);
+			break;
+		case 3:
+			status();
+			break;
+		}
+	}
 	return 0;
 }
