@@ -43,10 +43,13 @@ struct cfs_rq {
 };
 
 struct sched_entity {
+	int task_idx;
+	int called;
 	int on_rq;
 	int nice;
 	struct load_weight load;
 	struct cfs_rq* cfs_rq;
+	u64 vruntime;
 };
 
 struct cfs_rq cfs_pool;
