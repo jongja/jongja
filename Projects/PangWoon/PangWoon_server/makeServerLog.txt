@@ -1,0 +1,9 @@
+[명오] 서버구축초기 완료 - 18.7.20
+[민섭] 서버 수정 - 18.8.1 (결과값 해결해야함)
+[jongja] hanguel is not working.. so, I write to English.. 
+         1. all csv data(inputted by user) is saved training file..
+         2. if user meta file not exist, the output is bought from basic_data in trained_meta dir.
+[myungoh]
+         1. add check_metaDir(userid) function in Trained_model.py about checking meta file.
+            function's return value is 0 or 1. value 0 mean "be found meta file" and 1 mean "not found"
+         2. also, if check_metaDir func find a meta file, use meta file, otherwise use basic_data. 
