@@ -7,7 +7,7 @@ int map[101][101] = { 0 };
 bool visit[101][101] = { false };
 int dx[4] = {-1,0,1,0};
 int dy[4] = {0,1,0,-1};
-int st_x, st_y;
+int sx, sy;
 int ed_x, ed_y;
 
 typedef struct PAIR{
@@ -35,7 +35,7 @@ struct Queue{
 	}
 }q;
 
-void start(int sx, int sy){
+void start(){
 	q.init();
 	pair_t temp;
 	temp.x = sx; temp.y = sy;
@@ -69,12 +69,12 @@ int main(void){
 			for(int j = 0; j < 100; j++){
 				scanf("%1d ", &map[i][j]);
 				if(map[i][j] == 2){
-					st_x = i; st_y = j;
+					sx = i; sy = j;
 				}
 				visit[i][j] = false;
 			}
 		}
-		start(st_x, st_y);
+		start();
 		printf("#%d %d\n",tc, res ? 1 : 0);
 	}
 }
