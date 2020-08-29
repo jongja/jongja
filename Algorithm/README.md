@@ -13,6 +13,7 @@
 [15686](https://www.acmicpc.net/problem/15686) 
 [16234](https://www.acmicpc.net/problem/16234) 
 [16235](https://www.acmicpc.net/problem/16235) 
+[17142](https://www.acmicpc.net/problem/17142) 
 [17406](https://www.acmicpc.net/problem/17406) 
 
 ### Software Expert Academy [SWEA]
