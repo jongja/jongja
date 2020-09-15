@@ -7,35 +7,38 @@
  *
  */
 
+
 #define MAX_HEAP_SIZE 100000
-int heap[MAX_HEAP_SIZE] = { 0 };
-int heap_size = 0;
 
-void heap_push(int val) { // max heap push finction
-	if (heap_size == MAX_HEAP_SIZE) return;
-	int cur = ++heap_size;
-
-	while (cur != 1 && heap[cur >> 1] < val) { // if we change this "<" to ">", this code become Min heap.
-		heap[cur] = heap[cur >> 1];
-		cur >>= 1;
+typedef struct Heap { // Modulization.
+	int size;
+	int heap[MAX_HEAP_SIZE] = { 0 };
+	void init() {
+		size = 0;
 	}
-	heap[cur] = val;
-}
+	void push(int val) { // max heap push finction
+		if (heap_size == MAX_HEAP_SIZE) return;
+		int cur = ++heap_size;
 
-int heap_pop(void) {
-	if (!heap_size) return -1;
-	int res = heap[1];
-
-	int e = heap[heap_size--];
-	int cur = 1, child = 2;
-	while (child <= heap_size) {
-		if (child < heap_size && heap[child] < heap[child + 1]) child++; // if we change this "<" to ">", this code become Min heap.
-		if (heap[child] <= e) break; // if we change this "<=" to ">=", this code become Min heap.
-		heap[cur] = heap[child];
-		cur = child; child <<= 1;
+		while (cur != 1 && heap[cur >> 1] < val) { // if we change this "<" to ">", this code become Min heap.
+			heap[cur] = heap[cur >> 1];
+			cur >>= 1;
+		}
+		heap[cur] = val;
 	}
-	heap[cur] = e;
-	return res;
-}
+	int pop(void) {
+		if (!heap_size) return -1;
+		int res = heap[1];
 
-		
+		int e = heap[heap_size--];
+		int cur = 1, child = 2;
+		while (child <= heap_size) {
+			if (child < heap_size && heap[child] < heap[child + 1]) child++; // if we change this "<" to ">", this code become Min heap.
+			if (heap[child] <= e) break; // if we change this "<=" to ">=", this code become Min heap.
+			heap[cur] = heap[child];
+			cur = child; child <<= 1;
+		}
+		heap[cur] = e;
+		return res;
+	}
+}heap;
