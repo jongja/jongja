@@ -17,7 +17,7 @@ typedef struct Heap { // Modulization.
 		size = 0;
 	}
 	void push(int val) { // max heap push finction
-		if (heap_size == MAX_HEAP_SIZE) return;
+		if (size == MAX_HEAP_SIZE) return;
 		int cur = ++heap_size;
 
 		while (cur != 1 && heap[cur >> 1] < val) { // if we change this "<" to ">", this code become Min heap.
