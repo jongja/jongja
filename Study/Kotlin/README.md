@@ -1,5 +1,10 @@
 # Kotlin
 
+```
+fun main(args: Array<String>){
+    println("Hello, World!")
+}
+```
 1. [What is Kotlin](./study/what_is_kotlin.md)
 2. Basic of Kotlin
 3. Cancellation and Timeouts
