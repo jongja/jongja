@@ -61,7 +61,7 @@ World!
 이번 코드의 결과 역시 같은 모습을 볼 수 있는데 Code 1과의 차이점이라면 `runBlocking`을 사용한 것이다. Code 1에서 `Thread.sleep`을 `delay`로 바꾸게 된다면 오류가 발생하게 되는데, 이는 `delay`는 **suspend** 함수이기에 coroutine scope안에서 실행되거나 다른 **suspend** 함수에서 사용되어야 하기 때문이다.  
 따라서 이 부분을 `runBlocking`이라는 다른 coroutine builder를 사용하면 blocking coroutine을 return하게 되어 같은 결과를 내게 되는 것이다.  
 
-## Code 2
+## Code 3
 ```
 import kotlinx.coroutines.*
 
