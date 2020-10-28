@@ -98,9 +98,10 @@ fun myWorld() {
 하지만 이 경우 delay에서 오류가 발생하게 된다. `delay`는 **suspend function**으로 써 **suspend function이나 coroutine에서 호출되어야 한다.** 따라서 함수 `func myWorld`는 suspend function으로 바꾸어줘야 올바르게 작동하게 된다.  
 위의 예제의 올바른 표현 법은 `suspend fun myWorld()`가 된다.  
   
+  
 # Features of Coroutine
 
-## Coroutines ARE light-weight
+### Coroutines ARE light-weight
 coroutine은 정말 가벼운 특징을 가지고있다. 이를 보기 위하여 다음 예제를 보자.  
   
 ```
@@ -115,7 +116,7 @@ fun main() = runBlocking {
 ```
 위의 예제는 1초 뒤 100,000개의 coroutine을 통해 점을 찍는 함수라고 볼 수 있는데 결과를 보면 절대 버벅이지 않고 빠르게 동작하는 모습을 볼 수 있다. 만약 `launch`를 `thread`로 바꾸게 된다면 보다 버벅이는 현상을 볼 수 있는데 이만큼 **coroutine이 thread보다 상대적으로 가볍다는 것**을 알 수 있다.  
 
-## Global coroutines are like daemon thread
+### Global coroutines are like daemon thread
 
 Coroutine은 process가 끝나게 되면 thread 처럼 같이 끝나게 된다. 아래 예제를 보자.  
 
