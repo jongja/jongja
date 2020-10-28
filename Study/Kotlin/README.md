@@ -7,7 +7,8 @@ fun main(args: Array<String>){
 ```
 * [What is Kotlin](./study/what_is_kotlin.md)
 * Basic of Kotlin
-  - [GlobalScope, launch, runBlocking](./study/basic_1.md) 	
+  - [GlobalScope, launch, runBlocking](./study/basic_1.md) 
+  - [Job, Structured Concurrency, Suspend func, Features of Coroutine](./study/basic_2.md)	
 * Cancellation and Timeouts
 * Composing Suspending Functions
 * Coroutines under the hood
