@@ -1,4 +1,4 @@
-# Basic of Kotlin
+# Basic of Kotlin 1
 
 ## Code 1
 ```
