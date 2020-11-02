@@ -10,6 +10,7 @@ fun main(args: Array<String>){
   - [GlobalScope, launch, runBlocking](./study/basic_1.md) 
   - [Job, Structured Concurrency, Suspend func, Features of Coroutine](./study/basic_2.md)	
 * Cancellation and Timeouts
+  - [Cancellation](./study/Cancellation.md)
 * Composing Suspending Functions
 * Coroutines under the hood
 * Coroutine Cotext and Dispatcher
