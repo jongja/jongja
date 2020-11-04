@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MiniWebBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="cSX-zc-mPW">
+                                <rect key="frame" x="8" y="59" width="359" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="359" id="7Y8-Mx-npO"/>
+                                    <constraint firstAttribute="height" constant="28" id="zHE-IJ-Sbc"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="apple"/>
+                                    <segment title="twitter"/>
+                                    <segment title="facebook"/>
+                                    <segment title="google"/>
+                                </segments>
+                                <connections>
+                                    <action selector="BookMarkAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="Rdt-ln-1gb"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="   " borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJP-HF-f2t">
+                                <rect key="frame" x="0.0" y="95" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="akP-bq-TbS"/>
+                                </connections>
+                            </textField>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTb-aY-cfp">
+                                <rect key="frame" x="0.0" y="124" width="375" height="599"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZMF-Ir-CPe">
+                                <rect key="frame" x="177" y="396" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="1" green="0.51485843360000005" blue="0.52950871020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2q-LV-Jol">
+                                <rect key="frame" x="0.0" y="723" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cVT-jH-C53"/>
+                                    <barButtonItem title="Item" systemItem="rewind" id="YZN-Br-hhf">
+                                        <connections>
+                                            <action selector="GoBackAction:" destination="BYZ-38-t0r" id="P5o-7d-D4A"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="6Gx-kf-dX8"/>
+                                    <barButtonItem title="Item" systemItem="fastForward" id="s8i-rt-krD">
+                                        <connections>
+                                            <action selector="GoForwardAction:" destination="BYZ-38-t0r" id="Tuv-7b-RWC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="6TK-86-aFj"/>
+                                    <barButtonItem title="Item" systemItem="stop" id="irA-Xa-nWX">
+                                        <connections>
+                                            <action selector="StopAction:" destination="BYZ-38-t0r" id="sKS-Jx-nJY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="1zC-yP-xB0"/>
+                                    <barButtonItem title="Item" systemItem="refresh" id="08R-7g-Pk2">
+                                        <connections>
+                                            <action selector="RefreshAction:" destination="BYZ-38-t0r" id="UoP-e6-lNA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="c3o-2x-sJ3"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="cSX-zc-mPW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TMH-ko-lmn"/>
+                            <constraint firstItem="cSX-zc-mPW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="xGj-KM-1gV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="bookMarkSegmentedControl" destination="cSX-zc-mPW" id="MUg-Z5-ALw"/>
+                        <outlet property="indicateActivity" destination="ZMF-Ir-CPe" id="ObQ-Fi-2Sb"/>
+                        <outlet property="mainWebView" destination="FTb-aY-cfp" id="B0Y-m6-XCI"/>
+                        <outlet property="urlTextField" destination="aJP-HF-f2t" id="fiW-D3-c4j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.00492610837438"/>
+        </scene>
+    </scenes>
+</document>
