@@ -10,7 +10,7 @@ int main(void){
 }
 ```
 1. [String Codes](./String/strings.cpp)
-2. Sorts
+2. [Sorts](./Sorts)
 	- [Quick Sort](./Sorts/QuickSort.md)
 	- [Merge Sort](./Sorts/MergeSort.md)
 3. [Linked list (double)](./Linked_list/llist.cpp)
