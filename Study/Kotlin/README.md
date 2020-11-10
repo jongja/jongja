@@ -11,6 +11,7 @@ fun main(args: Array<String>){
   - [Job, Structured Concurrency, Suspend func, Features of Coroutine](./study/basic_2.md)	
 * Cancellation and Timeouts
   - [Cancellation](./study/Cancellation.md)
+  - [Timeout](./study/Timeout.md)
 * Composing Suspending Functions
 * Coroutines under the hood
 * Coroutine Cotext and Dispatcher
