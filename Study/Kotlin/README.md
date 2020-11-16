@@ -14,6 +14,7 @@ fun main(args: Array<String>){
   - [Timeout](./study/Timeout.md)
 * Composing Suspending Functions
   - [Composing Asyncronous Function](./study/async.md)
+  - [Lazy Asyncronous](./study/async_2.md)
 * Coroutines under the hood
 * Coroutine Cotext and Dispatcher
 

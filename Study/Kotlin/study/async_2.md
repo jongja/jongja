@@ -111,7 +111,16 @@ end, somethingUsefulTwoAsync
 
 ```
 fun main() = runBlocking {
+	val time = measureTimeMillis {
+		println("The answer is ${concurrentSum()}")
+	}
+	println("Completed in $time ms")
+}
 
+suspend fun concurrentSum() : Int = coroutineScope {
+	val one = somethingUsefulOneAsync()
+	val two = somethingUsefulTwoAsync()
+	one.await() + two.await()
 }
 
 suspend fun doSomethingUsefulOne() : Int {
@@ -129,5 +138,9 @@ suspend fun doSomethingUsefulTwo() : Int {
 
 ### Result
 ```
-
+The answer is 42
+Completed in 1024 ms
 ```
+
+위의 예제는 suspend function을 통해 coroutine안에서만 사용할 수 있도록 바꾼 올바른 방법의 예제이다. 이 방법을 사용하게 되면 exception에 대한 handling이 가능해지게 된다.  
+이러한 방법을 structured concurrency 한 설계라고 한다.
