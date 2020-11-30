@@ -4,7 +4,7 @@ println("String and character")
 val str : String = "Hello this is string" // wrap with ""
 val ch : Char = 'W'  // wrap with ''
 
-// 2. Expression that several lows
+// 2. Expression of several lows
 var lows : String = """
         Hello, this is Kotlin
         We can express multi-low string using this """
