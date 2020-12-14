@@ -21,7 +21,7 @@ python3 run.py [Image_name]
 ![result](./Result/result.PNG)
   
   
-### Coporate with
+### Cooporate with
 [Harry Nam](https://github.com/HaeUlNam)  
 [Kazaina](https://github.com/kazaina)  
 MyungO
