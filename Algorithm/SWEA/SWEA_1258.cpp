@@ -1,6 +1,6 @@
 /* [SWEA] 1258
  * Completed!
- * 
+ *
  * Memory : 416 KB
  * Time   : 4 ms
  */
@@ -78,7 +78,7 @@ void countMatrix(int curx, int cury, int mat_idx) {
 	q.push(tp);
 	int row = 0, col = 0;
 	int movx = curx, movy = cury;
-	while (map[movx][movy]) {     
+	while (map[movx][movy]) {
 		col++;
 		movy += dy[1];
 	}
