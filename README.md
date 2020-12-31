@@ -6,7 +6,7 @@
 **I am a developer who likes embedded systems and Linux kernel.**  
 **I am interested in the following fields.**  
   
-`embedded system` `linux kernel` `hardware security` `deep learning`  
+`embedded system` `linux kernel` `hardware security` `deep learning` `System Power Management`  
   
   ---
 
