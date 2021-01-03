@@ -1,6 +1,6 @@
 # Coroutines under the hood (CUH)
 
-어떻게 코틀린은 JVM에서 동작하는 걸까? 이 부분에 대한 이야기를 진행한다. 결국 Kotlin도 regular code이다. Compiler는 Kotlin으로 작성된 코드를 **Continuation Passing Style (CPS)**로 전환하게 된다.
+어떻게 코틀린은 JVM에서 동작하는 걸까? 이 부분에 대한 이야기를 진행한다. 결국 Kotlin도 regular code이다. Compiler는 Kotlin으로 작성된 코드를 `Continuation Passing Style (CPS)`로 전환하게 된다.
 예를 들어 다음과 같은 코드가 있다고 하자.
 
 ```
