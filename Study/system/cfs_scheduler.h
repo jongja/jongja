@@ -39,7 +39,6 @@ struct cfs_rq {
 	int nr_running;
 	struct load_weight load;
 	struct sched_entity* curr;
-
 };
 
 struct sched_entity {
@@ -66,6 +65,3 @@ void update_load_add(struct load_weight* lw, unsigned long inc);
 void __update_inv_weight(struct load_weight* lw);
 u64 __calc_delta(u64 delta_exec, unsigned long weight, struct load_weight* lw);
 u64 sched_slice(struct cfs_rq* cfs_rq, struct sched_entity* se);
-
-
-
