@@ -4,7 +4,7 @@
  * URL:
  * https://github.com/torvalds/linux/blob/master/drivers/cpuidle/governors/teo.c
  * 
- * Anaysis by jongja.
+ * Analysis by jongja.
  *
  */
 
