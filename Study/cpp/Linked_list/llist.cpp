@@ -19,7 +19,8 @@ void delete_list(int val) {
         if (walker->val == val) { // if delete node is head
             if (!walker->prev) { // if head node,
                 head = head->next;
-                head->prev = NULL;
+                if(head->next)
+                    head->next->prev = NULL;
             }
             else { // if delete node is middle or last
                 walker->prev->next = walker->next;
