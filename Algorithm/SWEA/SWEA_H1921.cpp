@@ -1,122 +1,127 @@
+/* Completed!
+ *  119 ms
+ */
+
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
 #include <stdio.h>
 
-#define MAXN 1000   
-#define MAXM 10     
 #define MAXF 20
+#define MAXN 1001
+#define MAXM 10
 #define MAXA 40000
-#define HASH 80003
-typedef long long ll;
+#define MAXH 80003
+#define NULL 0
+#define salloc() &nodes[sidx]
 
 struct Node {
-    int pid, area;
-    ll score;  
-    bool reserved;
-    Node* next;
-} nodes[MAXA], table[HASH];
-int nid;
-#define node() &nodes[nid]
+	int pid, area;
+	long long int cost;
+	bool reserved;
+	Node* next;
+}nodes[MAXA], htable[MAXH];
 
 struct User {
-    int num_friends;
-    int friends[MAXF];  
-    int count[MAXM + 1];
-    int total[MAXM + 1]; 
-} user[MAXN + 1];
+	int friend_cnt;
+	int friends[MAXF];
+	int total[MAXM + 1];
+	int count[MAXM + 1];
+}u[MAXN];
 
-#define swap(a,b) {register int t;t=a;a=b;b=t;}
-struct Heap { 
-    int size;
-    int nid[MAXA];
-    void push(int id) {
-        register int cur = ++size;
-        nid[size] = id;
-        while (cur > 1 && nodes[nid[cur]].score < nodes[nid[cur / 2]].score) {
-            swap(nid[cur], nid[cur / 2]);
-            cur >>= 1;
-        }
-    }
-    void pop() {
-        register int cur = 1, next;
-        nid[1] = nid[size];
-        while (cur * 2 < size) {
-            if (cur * 2 + 1 == size) next = cur * 2;
-            else next = (nodes[nid[cur * 2]].score < nodes[nid[cur * 2 + 1]].score) ? cur * 2 : cur * 2 + 1;
-            if (nodes[nid[cur]].score < nodes[nid[next]].score) break;
-            swap(nid[cur], nid[next]);
-            cur = next;
-        }
-        size--;
-    }
-    int top() { return nid[1]; }
-} heap[MAXM + 1]; 
+int M, sidx;
 
-int M;
-void init(int N, int _M)
+struct Heap
 {
-    nid = 0; M = _M;
-    for (register int i = 1; i <= N; i++) {
-        user[i].num_friends = 0;
-        for (register int j = 1; j <= M; j++) user[i].count[j] = user[i].total[j] = 0;
-    }
-    for (register int i = 1; i <= M; i++) heap[i].size = 0;
-    for (register int i = 0; i < HASH; i++) table[i].next = 0;
+	int size = 0, h[MAXA];
+	void init() {
+		size = 0;
+	}
+	void push(int idx) {
+		if (size == MAXA)
+			return;
+		long long val = nodes[idx].cost;
+		int cur = ++size;
+		while (cur != 1 && nodes[h[cur >> 1]].cost > val) {
+			h[cur] = h[cur >> 1];
+			cur >>= 1;
+		}
+		h[cur] = idx;
+	}
+	void pop() {
+		if (!size)
+			return;
+		int e = h[size--];
+		int cur = 1, ch = 2;
+		while (ch <= size) {
+			if (ch < size && nodes[h[ch]].cost > nodes[h[ch + 1]].cost) ch++;
+			if (nodes[h[ch]].cost >= nodes[e].cost) break;
+			h[cur] = h[ch];
+			cur = ch; ch <<= 1;
+		}
+		h[cur] = e;
+	}
+	int top() { return h[1]; }
+}heap[MAXM + 1];
+
+void init(int N, int _M) {
+	M = _M; sidx = 0;
+	for (int i = 1; i <= N; i++) {
+		u[i].friend_cnt = 0;
+		for (int j = 1; j <= M; j++) u[i].total[j] = u[i].count[j] = 0;
+	}
+	for (int i = 0; i < MAXH; i++) {
+		if (i <= M) heap[i].init();
+		htable[i].next = NULL;
+	}
 }
-
-void befriend(int uid1, int uid2)
-{
-    user[uid1].friends[user[uid1].num_friends++] = uid2;
-    user[uid2].friends[user[uid2].num_friends++] = uid1;
-    for (register int i = 1; i <= M; i++) {
-        user[uid1].total[i] += user[uid2].count[i];
-        user[uid2].total[i] += user[uid1].count[i];
-    }
+void befriend(int uid1, int uid2) {
+	u[uid1].friends[u[uid1].friend_cnt++] = uid2;
+	u[uid2].friends[u[uid2].friend_cnt++] = uid1;
+	for (register int i = 1; i <= M; i++) {
+		u[uid1].total[i] += u[uid2].count[i];
+		u[uid2].total[i] += u[uid1].count[i];
+	}
 }
-
-void add(int pid, int area, int price)
-{
-    register Node* node = node();
-    node->pid = pid; node->reserved = false; node->area = area;
-    node->score = (ll)price << 30 | pid;
-    node->next = table[pid % HASH].next;
-    table[pid % HASH].next = node; 
-    heap[area].push(nid++);
+void add(int pid, int area, int price) {
+	Node* newNode = salloc();
+	newNode->area = area; newNode->pid = pid;
+	newNode->reserved = false;
+	newNode->cost = ((long long)price << 30) | pid;
+	newNode->next = htable[pid % MAXH].next;
+	htable[pid % MAXH].next = newNode;
+	heap[area].push(sidx++);
 }
-
-void reserve(int uid, int pid)
-{
-    register Node* target = 0;
-    for (register Node* node = &table[pid % HASH]; node->next; node = node->next) {
-        if (node->next->pid != pid) continue;
-        target = node->next;
-        node->next = node->next->next;
-        break;
-    }
-    target->reserved = true;
-    user[uid].count[target->area]++;
-    user[uid].total[target->area]++;
-    for (register int i = 0; i < user[uid].num_friends; i++)
-        user[user[uid].friends[i]].total[target->area]++;
+void reserve(int uid, int pid) {
+	Node* walker = 0;
+	for (register Node* node = &htable[pid % MAXH]; node->next; node = node->next) {
+		if (node->next->pid != pid) continue;
+		walker = node->next;
+		node->next = node->next->next;
+		break;
+	}
+	walker->reserved = true;
+	u[uid].count[walker->area]++;
+	u[uid].total[walker->area]++;
+	for (int i = 0; i < u[uid].friend_cnt; i++) {
+		u[u[uid].friends[i]].total[walker->area]++;
+	}
 }
-
-int recommend(int uid)
-{
-    register int max = 0;
-    register Node node = { 0,0,(ll)1 << 40 };
-    for (register int i = 1; i <= M; i++) {
-        while (heap[i].size > 0 && nodes[heap[i].top()].reserved) heap[i].pop();
-        if (heap[i].size == 0) continue;
-        if (max < user[uid].total[i]) {
-            node = nodes[heap[i].top()];
-            max = user[uid].total[i];
-        }
-        else if (max == user[uid].total[i] && nodes[heap[i].top()].score < node.score)
-            node = nodes[heap[i].top()];
-    }
-    return node.pid;
+int recommend(int uid) {
+	int _max = 0;
+	Node node = { 0,0,(long long)1 << 40 };
+	for (int i = 1; i <= M; i++) {
+		while (heap[i].size > 0 && nodes[heap[i].top()].reserved) heap[i].pop();
+		if (!heap[i].size) continue;
+		if (_max < u[uid].total[i]) {
+			_max = u[uid].total[i];
+			node = nodes[heap[i].top()];
+		}
+		else if (_max == u[uid].total[i] && nodes[heap[i].top()].cost < node.cost)
+			node = nodes[heap[i].top()];
+	}
+	return node.pid;
 }
 
 #define INIT			100
