@@ -33,7 +33,7 @@ typedef struct Heap { // Modulization.
 		int e = heap[size--];
 		int cur = 1, child = 2;
 		while (child <= size) {
-			if (child < size && heap[child] < heap[child + 1]) child++; // if we change this "<" to ">", this code become Min heap.
+			if (child + 1 <= size && heap[child] < heap[child + 1]) child++; // if we change this "<" to ">", this code become Min heap.
 			if (heap[child] <= e) break; // if we change this "<=" to ">=", this code become Min heap.
 			heap[cur] = heap[child];
 			cur = child; child <<= 1;
