@@ -10,7 +10,7 @@
 #define CHILD   2
 
 #define MAXN 200
-#define MAXH 7003
+#define MAXH 13003
 #define MAXLEN 20
 #define MAXHEAP 400
 #define INF 1000000000
