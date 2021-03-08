@@ -217,6 +217,7 @@ char datas[200][200] = {
 #define PRIME_NUM2 29
 #define MAX_STR_SIZE 100
 #define MAX_ALLOCATE_POOL_SIZE 2000000
+#define salloc() &allocate_pool_array[allocate_pool_idx++]
 
 int collision = 0;
 
@@ -231,9 +232,6 @@ hnode allocate_pool_array[MAX_ALLOCATE_POOL_SIZE] = { 0 };
 int allocate_pool_idx = 0;
 hnode* hash_table[HASH_SIZE] = { 0 }; // hash table
 
-hnode* salloc() {
-	return &allocate_pool_array[allocate_pool_idx++];
-}
 
 unsigned long long hasing(char* str) { // hasing function for string
 	unsigned long long key = 0, p = 1;
