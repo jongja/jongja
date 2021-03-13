@@ -1,6 +1,8 @@
-/* Graph
- * (with linked list)
- *
+/* Dijkastra with linked list Graph
+ * 
+ * Minimum route Algorithm.
+ * This algorithm use priority queue made by MIN Heap.
+ * This algorithm need its own table to update minimum route.
  */
 #define _CRT_SECURE_NO_WARNINGS
 
