@@ -18,7 +18,7 @@ int main(void){
 5. [Disjoint Set](./DisjointSet/DisjointSet.md)
 6. [Binary Search](./libcodes/bsearch.cpp)
 7. [Graph](./Graph/graph.cpp)
-	- Dijkstra
+	- [Dijkstra](./Graph/dijkstra.cpp)
 	- Kruskal
 8. Trie
 9. [KMP](./KMP/kmp.cpp)  
