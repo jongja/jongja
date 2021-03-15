@@ -1,4 +1,4 @@
-/* Dijkastra with linked list Graph
+/* Dijkstra with linked list Graph
  * 
  * Minimum route Algorithm.
  * This algorithm use priority queue made by MIN Heap.
