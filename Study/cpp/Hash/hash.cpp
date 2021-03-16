@@ -12,7 +12,7 @@ using namespace std;
 #define PRIME_NUM 23
 #define	PRIME_NUM2 29
 
-unsigned int hasing(char* str) { // hasing function for string
+unsigned int hashing(char* str) { // hasing function for string
 	unsigned key = 0, p = 1;
 	for (int i = 0; str[i]; i++) {
 		key += str[i] * p;
@@ -23,7 +23,7 @@ unsigned int hasing(char* str) { // hasing function for string
 
 int main(void) {
 	char str1[] = "Goooood!";
-	int idx = hasing(str1);
+	int idx = hashing(str1);
 	cout << "STR : " << str1 << endl;
 	cout << "IDX : " << idx << endl;
 	return 0;
