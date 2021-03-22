@@ -30,9 +30,11 @@ typedef struct Heap { // Modulization.
 
 		while (cur != 1 && n[heap[cur >> 1]].value < n[node_idx].value) { 
 			heap[cur] = heap[cur >> 1];
+			n[heap[cur >> 1]].heap_idx = cur;
 			cur >>= 1;
 		}
 		heap[cur] = node_idx;
+		n[node_idx].heap_idx = cur;
 	}
 
 	int pop(void) {
@@ -45,9 +47,12 @@ typedef struct Heap { // Modulization.
 			if (child + 1 <= size && n[heap[child]].value < n[heap[child + 1]].value) child++;
 			if (n[heap[child]].idx <= e) break; 
 			heap[cur] = heap[child];
+			n[heap[child]].heap_idx = cur;
 			cur = child; child <<= 1;
 		}
+
 		heap[cur] = e;
+		n[e].heap_idx = cur;
 		return res;
 	}
 
@@ -59,15 +64,20 @@ typedef struct Heap { // Modulization.
 			if (child + 1 <= size && n[heap[child]].value < n[heap[child + 1]].value) child++;
 			if (n[heap[child]].idx <= e) break;
 			heap[cur] = heap[child];
+			n[heap[child]].heap_idx = cur;
 			cur = child; child <<= 1;
 		}
 
+		heap[cur] = e;
+
 		while (cur != 1 && n[heap[cur >> 1]].value < n[node_idx].value) {
 			heap[cur] = heap[cur >> 1];
+			n[heap[cur >> 1]].heap_idx = cur;
 			cur >>= 1;
 		}
 
 		heap[cur] = e;
+		n[e].heap_idx = cur;	
 	}
 
 	void modify(int node_idx, int mod_value) {
