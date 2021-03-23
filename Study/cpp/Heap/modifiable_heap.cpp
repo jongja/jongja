@@ -45,7 +45,7 @@ typedef struct Heap { // Modulization.
 		int cur = 1, child = 2;
 		while (child <= size) {
 			if (child + 1 <= size && n[heap[child]].value < n[heap[child + 1]].value) child++;
-			if (n[heap[child]].idx <= e) break; 
+			if (n[heap[child]].value <= n[e].value) break; 
 			heap[cur] = heap[child];
 			n[heap[child]].heap_idx = cur;
 			cur = child; child <<= 1;
@@ -62,7 +62,7 @@ typedef struct Heap { // Modulization.
 
 		while (child <= size) {
 			if (child + 1 <= size && n[heap[child]].value < n[heap[child + 1]].value) child++;
-			if (n[heap[child]].idx <= e) break;
+			if (n[heap[child]].value <= n[e].value) break;
 			heap[cur] = heap[child];
 			n[heap[child]].heap_idx = cur;
 			cur = child; child <<= 1;
