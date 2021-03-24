@@ -10,7 +10,7 @@
 
 #define MAX_HEAP_SIZE 100000
 
-typedef struct Heap { // Modulization.
+struct Heap { // Modulization.
 	int size;
 	int heap[MAX_HEAP_SIZE] = { 0 };
 	void init() {
@@ -26,9 +26,8 @@ typedef struct Heap { // Modulization.
 		}
 		heap[cur] = val;
 	}
-	int pop(void) {
-		if (!size) return -1;
-		int res = heap[1];
+	void pop(void) {
+		if (!size) return;
 
 		int e = heap[size--];
 		int cur = 1, child = 2;
@@ -39,6 +38,8 @@ typedef struct Heap { // Modulization.
 			cur = child; child <<= 1;
 		}
 		heap[cur] = e;
-		return res;
 	}
-}heap;
+	int top() {
+		return heap[1];
+	}
+}h; // Declare as 'h'
