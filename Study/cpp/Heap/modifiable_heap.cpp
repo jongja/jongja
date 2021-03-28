@@ -58,7 +58,7 @@ typedef struct Heap { // Modulization.
 
 	void delete_with_idx(int node_idx) {
 		int e = heap[size--];
-		int cur = node_idx, child = node_idx << 1;
+		int cur = n[node_idx].heap_idx, child = cur << 1;
 
 		while (child <= size) {
 			if (child + 1 <= size && n[heap[child]].value < n[heap[child + 1]].value) child++;
