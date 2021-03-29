@@ -70,7 +70,7 @@ typedef struct Heap { // Modulization.
 
 		heap[cur] = e;
 
-		while (cur != 1 && n[heap[cur >> 1]].value < n[node_idx].value) {
+		while (cur != 1 && n[heap[cur >> 1]].value < n[e].value) {
 			heap[cur] = heap[cur >> 1];
 			n[heap[cur >> 1]].heap_idx = cur;
 			cur >>= 1;
