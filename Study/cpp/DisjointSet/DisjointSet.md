@@ -11,9 +11,9 @@ int Union(int a, int b) {
 	int ap = Find(a);
 	int bp = Find(b);
 
-	if (ap != bp) {
-		p[bp] = ap;
-	}
+	if (ap < bp) p[bp] = ap;
+	else p[ap] = bp;
+	
 }
 
 int Find(int n) {
